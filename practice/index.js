@@ -1,1 +1,1 @@
-import './watch'
+import './compoent'
