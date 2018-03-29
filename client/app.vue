@@ -15,7 +15,7 @@
     import Header from './views/layout/header.vue'
     import Footer from './views/layout/footer.jsx'
     import Todo from './views/todo/todo.vue'
-    import {mapGetters,mapState} from 'vuex'
+    import {mapGetters,mapState,mapActions,mapMutations} from 'vuex'
 
     export default {
         components: {
@@ -23,22 +23,27 @@
             Footer
         },
         mounted() {
-            let i = 0
-            setInterval(() => {
-                this.$store.commit("updateCount",++i)
-            },1000)
+//            let i = 0;
+//            setInterval(() => {
+//                this.updateCount({
+//                    num: ++i,
+//                    num2:6
+//                })
+//            },1000)
+            this.updateCountAsync({
+                num:4,
+                time:3000
+            })
         },
         computed:{
             ...mapState({
-                counter:'count'
+                counter:'count',
             }),
             ...mapGetters(['fullName']),
-//            count() {
-//                return this.$store.state.count
-//            },
-//            fullName() {
-//                return this.$store.getters.fullName
-//            }
+        },
+        methods:{
+            ...mapActions(['updateCountAsync']),
+            ...mapMutations(['updateCount'])
         }
     }
 </script>
