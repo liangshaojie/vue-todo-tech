@@ -8,6 +8,7 @@ const VueServerRenderer = require('vue-server-renderer')
 const serverConfig = require('../../build/webpack.config.server')
 const serverCompiler = webpack(serverConfig)
 const mfs = new MemoryFS()
+const serverRender = require('./server-render')
 serverCompiler.outputFileSystem = mfs
 
 let bundle
@@ -22,6 +23,7 @@ serverCompiler.watch({}, (err, stats) => {
         'vue-ssr-server-bundle.json'
     )
     bundle = JSON.parse(mfs.readFileSync(bundlePath, 'utf-8'))
+    console.log('new bundle generated')
 })
 
 const handleSSR = async (ctx) => {
@@ -37,13 +39,19 @@ const handleSSR = async (ctx) => {
     const clientManifest = clientManifestResp.data
 
     const template = fs.readFileSync(
-        path.join(_dirname,'../server.template.ejs')
+        path.join(__dirname, '../server-template.ejs'), 'utf-8'
     )
 
-    const renderer = VueServerRenderer.createBUndleRenderer(
+    const renderer = VueServerRenderer.createBundleRenderer(
         bundle,{
             inject:false,
             clientManifest
         }
     )
+    await serverRender(ctx,renderer,template)
 }
+
+const router = new Router()
+router.get('*',handleSSR)
+
+module.exports = router
