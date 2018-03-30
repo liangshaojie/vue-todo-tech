@@ -2,6 +2,8 @@ const Koa = require('koa')
 const app = new Koa()
 const isDev = process.env.NODE_ENV === 'development'
 const pageRouter = require('./routers/dev-ssr')
+const send = require('koa-send')
+const path = require('path')
 
 
 app.use(async (ctx, next) => {
@@ -18,7 +20,13 @@ app.use(async (ctx, next) => {
         }
     }
 })
-
+app.use(async (ctx,next) => {
+    if(ctx.path === './favicon.ico'){
+        await send(ctx,'/favicon.ico',{root:path.join(__dirname,'../')})
+    }else{
+        await next()
+    }
+})
 app.use(pageRouter.routes()).use(pageRouter.allowedMethods())
 
 const HOST = process.env.HOST || '0.0.0.0'
