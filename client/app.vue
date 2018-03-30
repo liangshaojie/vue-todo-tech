@@ -18,6 +18,9 @@
     import {mapGetters,mapState,mapActions,mapMutations} from 'vuex'
 
     export default {
+        metaInfo:{
+            title:'Jokcy T0do App'
+        },
         components: {
             Header,
             Footer
