@@ -5,9 +5,10 @@
         <p>  {{counter}}</p>
         <p>{{fullName}}</p>
         <!--<todo></todo>-->
-        <router-link to="/app">app</router-link>
-        <router-link to="/login">login</router-link>
+        <!--<router-link to="/app">app</router-link>-->
+        <!--<router-link to="/login">login</router-link>-->
         <router-view></router-view>
+        <Notification content="test notify"></Notification>
         <Footer></Footer>
     </div>
 </template>
