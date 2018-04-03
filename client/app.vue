@@ -8,7 +8,8 @@
         <!--<router-link to="/app">app</router-link>-->
         <!--<router-link to="/login">login</router-link>-->
         <router-view></router-view>
-        <Notification content="test notify"></Notification>
+        <!--<Notification content="test notify"></Notification>-->
+        <button @click="notify">notify</button>
         <Footer></Footer>
     </div>
 </template>
@@ -27,6 +28,7 @@
             Footer
         },
         mounted() {
+
 //            let i = 0;
 //            setInterval(() => {
 //                this.updateCount({
@@ -34,10 +36,10 @@
 //                    num2:6
 //                })
 //            },1000)
-            this.updateCountAsync({
-                num:4,
-                time:3000
-            })
+//            this.updateCountAsync({
+//                num:4,
+//                time:3000
+//            })
         },
         computed:{
             ...mapState({
@@ -47,7 +49,13 @@
         },
         methods:{
             ...mapActions(['updateCountAsync']),
-            ...mapMutations(['updateCount'])
+            ...mapMutations(['updateCount']),
+            notify() {
+                this.$notify({
+                    content:'test twst',
+                    btn:'close'
+                })
+            }
         }
     }
 </script>
