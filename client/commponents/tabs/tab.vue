@@ -21,6 +21,9 @@
                 this.$parent.onChange(this.index)
             }
         },
+        mounted() {
+            this.$parent.panes.push(this)
+        },
         render() {
             const tab = this.$slots.label || <span>{this.label}</span>
             const className = {
