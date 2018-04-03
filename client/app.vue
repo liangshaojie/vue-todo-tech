@@ -7,6 +7,13 @@
         <!--<todo></todo>-->
         <!--<router-link to="/app">app</router-link>-->
         <!--<router-link to="/login">login</router-link>-->
+        <!--<tabs>-->
+            <!--<tab>-->
+                <!--<span slot="lable"></span>-->
+                <!--<p>This is tab1</p>-->
+            <!--</tab>-->
+        <!--</tabs>-->
+
         <router-view></router-view>
         <!--<Notification content="test notify"></Notification>-->
         <button @click="notify">notify</button>
