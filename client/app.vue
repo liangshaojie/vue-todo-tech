@@ -16,7 +16,7 @@
 
         <router-view></router-view>
         <!--<Notification content="test notify"></Notification>-->
-        <button @click="notify">notify</button>
+        <!--<button @click="notify">notify</button>-->
         <Footer></Footer>
     </div>
 </template>
@@ -48,20 +48,20 @@
 //            })
         },
         computed:{
-            ...mapState({
-                counter:'count',
-            }),
-            ...mapGetters(['fullName']),
+//            ...mapState({
+//                counter:'count',
+//            }),
+//            ...mapGetters(['fullName']),
         },
         methods:{
-            ...mapActions(['updateCountAsync']),
-            ...mapMutations(['updateCount']),
-            notify() {
-                this.$notify({
-                    content:'test twst',
-                    btn:'close'
-                })
-            }
+//            ...mapActions(['updateCountAsync']),
+//            ...mapMutations(['updateCount']),
+//            notify() {
+//                this.$notify({
+//                    content:'test twst',
+//                    btn:'close'
+//                })
+//            }
         }
     }
 </script>
