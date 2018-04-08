@@ -35,7 +35,6 @@
             Footer
         },
         mounted() {
-
 //            let i = 0;
 //            setInterval(() => {
 //                this.updateCount({

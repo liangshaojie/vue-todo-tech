@@ -56,7 +56,7 @@ const notify = (options) => {
         instance.vm.$destroy()
     })
     instance.vm.$on('close',() => {
-        instance.vm.visible = false
+            instance.vm.visible = false
     })
     return instance.vm
 }
