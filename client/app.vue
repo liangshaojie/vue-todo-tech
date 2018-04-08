@@ -2,6 +2,9 @@
     <div id="app">
         <div id="cover"></div>
         <Header></Header>
+        <div id="loading" v-show="loading">
+            <loading></loading>
+        </div>
         <!--<p>  {{counter}}</p>-->
         <!--<p>{{fullName}}</p>-->
         <!--<todo></todo>-->
@@ -14,7 +17,9 @@
             <!--</tab>-->
         <!--</tabs>-->
 
-        <router-view></router-view>
+        <transition name="fade" mode="out-in">
+            <router-view />
+        </transition>
         <!--<Notification content="test notify"></Notification>-->
         <!--<button @click="notify">notify</button>-->
         <Footer></Footer>
@@ -24,6 +29,7 @@
     import Header from './views/layout/header.vue'
     import Footer from './views/layout/footer.jsx'
     import Todo from './views/todo/todo.vue'
+    import Loading from './commponents/loading/loading.vue'
     import {mapGetters,mapState,mapActions,mapMutations} from 'vuex'
 
     export default {
@@ -32,7 +38,8 @@
         },
         components: {
             Header,
-            Footer
+            Footer,
+            Loading
         },
         mounted() {
 //            let i = 0;
@@ -48,6 +55,7 @@
 //            })
         },
         computed:{
+            ...mapState(['loading'])
 //            ...mapState({
 //                counter:'count',
 //            }),
