@@ -46,9 +46,10 @@
 //            })
 //        },
         asyncData({store}) {
-//            if (store.state.user) {
-                    return store.dispatch('fetchTodos')
-//            }
+            if (store.state.user) {
+                return store.dispatch('fetchTodos')
+            }
+            return Promise.resolve()
         },
         beforeRouteUpdate(to, from, next) {
             console.log('todo update enter')
