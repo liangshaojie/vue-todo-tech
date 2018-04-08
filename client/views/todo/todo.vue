@@ -45,10 +45,11 @@
 //                console.log('after enter vm.id is ', vm.id)
 //            })
 //        },
-        asyncData({store}) {
+        asyncData({store,router}) {
             if (store.state.user) {
                 return store.dispatch('fetchTodos')
             }
+            router.replace('/login')
             return Promise.resolve()
         },
         beforeRouteUpdate(to, from, next) {
