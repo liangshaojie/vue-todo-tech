@@ -2,7 +2,7 @@
     <section class="real-app">
         <div class="tab-container">
             <tabs :value="filter" @change="handleChangeTab">
-                <tab :label="tab" :index="tab" v-for="tab in stats" :key="tab" />
+                <tab :label="tab" :index="tab" v-for="tab in stats" :key="tab"/>
             </tabs>
         </div>
         <input
@@ -39,35 +39,33 @@
         metaInfo: {
             title: 'The Todo App'
         },
-        beforeRouteEnter (to, from, next) {
-            console.log('todo before enter', this)
-            next(vm => {
-                console.log('after enter vm.id is ', vm.id)
-            })
+//        beforeRouteEnter(to, from, next) {
+//            console.log('todo before enter', this)
+//            next(vm => {
+//                console.log('after enter vm.id is ', vm.id)
+//            })
+//        },
+        asyncData({store}) {
+//            if (store.state.user) {
+                    return store.dispatch('fetchTodos')
+//            }
         },
-        beforeRouteUpdate (to, from, next) {
+        beforeRouteUpdate(to, from, next) {
             console.log('todo update enter')
             next()
         },
-        beforeRouteLeave (to, from, next) {
+        beforeRouteLeave(to, from, next) {
             console.log('todo leave enter')
             next()
         },
         props: ['id'],
-        mounted () {
+        mounted() {
             // console.log('todo mounted')
             if (this.todos && this.todos.length < 1) {
                 this.fetchTodos()
             }
         },
-        asyncData ({ store, router }) {
-            if (store.state.user) {
-                return store.dispatch('fetchTodos')
-            }
-            router.replace('/login')
-            return Promise.resolve()
-        },
-        data () {
+        data() {
             return {
                 filter: 'all',
                 stats: ['all', 'active', 'completed']
@@ -79,7 +77,7 @@
         },
         computed: {
             ...mapState(['todos']),
-            filteredTodos () {
+            filteredTodos() {
                 if (this.filter === 'all') {
                     return this.todos
                 }
@@ -95,7 +93,7 @@
                 'updateTodo',
                 'deleteAllCompleted'
             ]),
-            handleAdd (e) {
+            handleAdd(e) {
                 const content = e.target.value.trim()
                 if (!content) {
                     this.$notify({
@@ -110,7 +108,7 @@
                 this.addTodo(todo)
                 e.target.value = ''
             },
-            toggleTodoState (todo) {
+            toggleTodoState(todo) {
                 this.updateTodo({
                     id: todo.id,
                     todo: Object.assign({}, todo, {
@@ -118,11 +116,11 @@
                     })
                 })
             },
-            clearAllCompleted () {
+            clearAllCompleted() {
                 // this.todos = this.todos.filter(todo => !todo.completed)
                 this.deleteAllCompleted()
             },
-            handleChangeTab (value) {
+            handleChangeTab(value) {
                 this.filter = value
             }
         }
@@ -130,12 +128,13 @@
 </script>
 
 <style lang="stylus" scoped>
-    .real-app{
+    .real-app {
         width 600px
         margin 0 auto
         box-shadow 0 0 5px #666
     }
-    .add-input{
+
+    .add-input {
         position: relative;
         margin: 0;
         width: 100%;
@@ -153,8 +152,9 @@
         font-smoothing: antialiased;
         padding: 16px 16px 16px 60px;
         border: none;
-        box-shadow: inset 0 -2px 1px rgba(0,0,0,0.03);
+        box-shadow: inset 0 -2px 1px rgba(0, 0, 0, 0.03);
     }
+
     .tab-container
         background-color #fff
         padding 0 15px

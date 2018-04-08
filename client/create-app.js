@@ -20,7 +20,6 @@ Vue.use(Tabs)
 export default () => {
     const router = createRoute()
     const store = createStore()
-
     const app = new Vue({
         router,
         store,

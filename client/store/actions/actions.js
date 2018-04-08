@@ -1,4 +1,4 @@
-import model from '../../modle/client-model'
+import model from 'model'
 import notify from '../../commponents/notification/function'
 import bus from '../../util/bus'
 
