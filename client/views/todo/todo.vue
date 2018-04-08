@@ -29,15 +29,13 @@
 <script>
     import Item from './item.vue'
     import Helper from './Helper.vue'
-
-    let id = 0
+    import {mapState,mapActions} from 'vuex'
     export default {
         metaInfo: {
             title:'Toda page metaInfo'
         },
         data() {
             return {
-                todos: [],
                 filter: 'all',
                 stats: ['all', 'active', 'completed']
             }
@@ -46,7 +44,11 @@
             Item,
             Helper
         },
+        mounted() {
+            this.fetchTodos()
+        },
         computed: {
+            ...mapState(['todos']),
             filteredTodos() {
                 if (this.filter === 'all') {
                     return this.todos
@@ -56,17 +58,18 @@
             }
         },
         methods: {
+            ...mapActions(['fetchTodos']),
             handleChangeTab(value) {
                 this.filter = value;
             },
-            addTodo(e) {
-                this.todos.unshift({
-                    id: id++,
-                    content: e.target.value.trim(),
-                    completed: false
-                })
-                e.target.value = ''
-            },
+//            addTodo(e) {
+//                this.todos.unshift({
+//                    id: id++,
+//                    content: e.target.value.trim(),
+//                    completed: false
+//                })
+//                e.target.value = ''
+//            },
             deleteTodo(id) {
                 this.todos.splice(this.todos.findIndex(todo => todo.id === id), 1)
             },
